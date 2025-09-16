@@ -68,8 +68,8 @@ Manage resources lifecycle (provision & destroy).
 
 🔗 References
 
-Azure AKS Documentation
+- [Azure AKS Documentation](https://learn.microsoft.com/en-us/azure/aks/)
 
-Terraform Azure Provider
+- [Terraform Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
 
-Kubernetes Documentation
+- [Kubernetes Documentation](https://kubernetes.io/docs/home/)
