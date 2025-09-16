@@ -8,12 +8,13 @@ It is designed as a hands-on lab for learning the fundamentals of **Infrastructu
 
 ## 🚀 Architecture
 
-![Architecture](Architecture.png)
+![Architecture](docs/architecture.png)
 
 - **Terraform** – Manages infrastructure as code.
 - **Azure** – Cloud platform hosting the AKS cluster.
 - **AKS (Azure Kubernetes Service)** – Kubernetes cluster running in Azure.
 - **Application (Nginx)** – Deployed to AKS as a test workload.
+
 
 ---
 
@@ -23,36 +24,53 @@ It is designed as a hands-on lab for learning the fundamentals of **Infrastructu
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)  
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)  
 
-Login to Azure:
+### Install kubectl (Linux example)
 ```bash
+# Using snap (quickest)
+sudo snap install kubectl --classic
+
+# Or download binary directly
+curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+Verify:
+
+kubectl version --client
+
+Authenticate with Azure
+
 az login
 az account set --subscription "<YOUR_SUBSCRIPTION_ID>"
 
-
 ⚡ Usage
 1. Deploy Infrastructure
+
 cd terraform
 terraform init
 terraform plan
 terraform apply -auto-approve
 
 2. Configure kubectl
+
 az aks get-credentials --resource-group rg-aks-lab --name aks-lab-cluster
 kubectl get nodes
 
+Expected output:
+
+NAME                                STATUS   ROLES   AGE   VERSION
+aks-nodepool1-xxxxx                 Ready    agent   1m    v1.29.x
+
 3. Deploy Sample Application
+
 kubectl apply -f ../k8s/nginx.yaml
 kubectl get svc nginx-service
 
-
-Open the EXTERNAL-IP in your browser to see the Nginx welcome page 🎉.
+When EXTERNAL-IP appears, open it in a browser → you should see the Nginx welcome page 🎉.
 
 🧹 Cleanup
 
-When done, destroy all resources:
-
-cd terraform
-terraform destroy -auto-approve
+When finished, destroy all resources:
 
 📖 Learning Objectives
 
@@ -64,13 +82,5 @@ Understand how kubectl interacts with Kubernetes clusters.
 
 Deploy a basic containerized application to AKS.
 
-Manage resources lifecycle (provision & destroy).
+Manage infrastructure lifecycle (provision → deploy → destroy).
 
-
----
-
-## ✅ References
-
-- [Azure AKS Documentation](https://learn.microsoft.com/en-us/azure/aks/)  
-- [Terraform Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)  
-- [Kubernetes Documentation](https://kubernetes.io/docs/home/)
