@@ -8,7 +8,7 @@ It is designed as a hands-on lab for learning the fundamentals of **Infrastructu
 
 ## 🚀 Architecture
 
-![Architecture](docs/architecture.png)
+![Architecture](Architecture.png)
 
 - **Terraform** – Manages infrastructure as code.
 - **Azure** – Cloud platform hosting the AKS cluster.
